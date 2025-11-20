@@ -1,26 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Official Website of [Musician's Name]">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ben Minahan Music - Official Website</title>
-  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* Global Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", Arial, sans-serif;
+      background: linear-gradient(135deg, #111 0%, #1f1f1f 100%);
+      color: #fff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: min(90%, 1100px);
+      margin: auto;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.55);
+      padding: 15px 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      gap: 40px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding-bottom: 4px;
+      transition: 0.25s ease;
+    }
+
+    nav a:hover {
+      color: #7ab8ff;
+      border-bottom: 2px solid #7ab8ff;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: url('/img/benm-dandylion.jpg') center/cover no-repeat;
+      height: 70vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.5), #111);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+
+    .hero h2 {
+      font-size: 3.3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+    }
+
+    /* Section Titles */
+    h2 {
+      font-size: 2.4rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    /* Music Section */
+    .music {
+      padding: 70px 0;
+      text-align: center;
+    }
+
+    .glass-box {
+      margin: 25px auto;
+      padding: 25px;
+      width: min(90%, 500px);
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 18px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+
+    /* Custom Select */
+    .styled-select {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      font-size: 1.05rem;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: 0.3s;
+    }
+
+    .styled-select:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    .styled-select:focus {
+      outline: 2px solid #7ab8ff;
+    }
+
+    /* Ensure visible text in the dropdown list */
+    .styled-select {
+    color: #fff; /* keeps the selected value white in your dark UI */
+    }
+
+    /* Make the option text dark on the (typically) light dropdown background */
+    .styled-select option {
+    color: #111;
+    background: #fff; /* explicit background helps some browsers */
+    }
+
+    /* small nicety: make the selected option show white text on dark background */
+    .styled-select option:checked,
+    .styled-select option[selected] {
+    color: #fff;
+    background: rgba(0,0,0,0.6);
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 20px;
+      filter: drop-shadow(0 0 6px rgba(0,0,0,0.35));
+    }
+
+    iframe {
+      border-radius: 16px;
+      margin-top: 30px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    }
+
+    /* About Section */
+    .about {
+      padding: 70px 0;
+      text-align: center;
+      background: #181818;
+    }
+
+    .about p {
+      max-width: 800px;
+      margin: 12px auto;
+      opacity: 0.9;
+      font-size: 1.1rem;
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: 70px 0;
+      text-align: center;
+    }
+
+    .contact a {
+      color: #7ab8ff;
+      font-size: 1.3rem;
+      text-decoration: none;
+    }
+
+    .contact a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      padding: 25px 0;
+      background: #101010;
+      text-align: center;
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+  </style>
 </head>
+
 <body>
-  <header class="header">
-    <div class="container">
-      <nav>
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#music">Music</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#music">Music</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <section id="hero" class="hero" style="background-image: url('ben-dandylion.jpg');">
+  <section class="hero">
     <div class="hero-content">
       <h2>Welcome to my music page!</h2>
       <p>I'll post links to my latest tracks and videos. Always free.</p>
@@ -28,51 +230,72 @@
   </section>
 
   <section id="music" class="music">
-    <div class="container">
-      <h2>Listen to the latest track</h2>
-      <audio controls>
-        <source src="audio/track.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+    <h2>Listen to the latest tracks:</h2>
+
+    <div class="glass-box">
+      <select id="songSelect" class="styled-select">
+        <option value="ko-album/01 Black Sludge.wav">Black Sludge</option>
+        <option value="ko-album/02 I'll Wait It Out.wav">I'll Wait it Out</option>
+        <option value="ko-album/03 What are you Running From.wav">What are you Running From</option>
+        <option value="ko-album/04 Ghosts.wav">Ghost (Justin Bieber Cover)</option>
+        <option value="ko-album/05 Every Time you Look Around.wav">Every Time you Look Around</option>
+        <option value="ko-album/06 Can't Look Away.wav">Can't Look Away</option>
+      </select>
+
+      <audio id="audioPlayer" controls>
+        <source id="audioSource" src="ko-album/01 Black Sludge.wav" type="audio/mpeg" />
       </audio>
     </div>
-    <br>
-    <div class="container">
-      <h2>or watch the latest music video</h2>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/m8lIulP25Xk?si=ZqQTw4-spLKIsYto" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </div>
+
+    <h2>or watch the latest music video</h2>
+    <iframe width="560" height="315"
+      src="https://www.youtube.com/embed/m8lIulP25Xk?si=ZqQTw4-spLKIsYto"
+      allowfullscreen>
+    </iframe>
   </section>
 
   <section id="about" class="about">
     <div class="container">
       <h2>About Me</h2>
-      <div>
-        <p style="text-align:center;">Hey, everyone! My name is Ben Minahan and I've been playing music in one form or another my whole life. Guitar, bass, piano, voice, and more recently drums and banjo. I also LOVE making beats, arranging melodies, or making weird AF sounds in my home audio production studio in Kansas City, MO. My main goal with music is to make songs that people love listening to, and have fun doing it.</p>
-        
-        <p style="text-align:center;">Over the years, I have had the opportunity to play a wide range of music with some extremely talented musicians. But, I am always cooking something up solo. Since 2020, I have released 16 original songs in a variety of genres.</p>
-        
-        <p style="text-align:center;">In 2023, I'm hoping to get into playing more live shows, so I hope to see you there! Until then, I invite you to listen to all my music for free (on YouTube or all major streaming platforms), and if you like what you hear, you can share it with others or even buy a physical CD like its 2002!</p>
-        
-        <p style="text-align:center;">My latest record, "K.O." will be available everywhere March 1st, 2023.</p>
-        
-        <p style="text-align:center;">Cheers,</p>
-        
-        <p style="text-align:center;">Ben</p>
-      </div>
+
+      <p>Hey, everyone! My name is Ben Minahan and I've been playing music in one form or another my whole life...</p>
+      <p>Over the years, I have had the opportunity to play a wide range of music...</p>
+      <p>In 2023, I'm hoping to get into playing more live shows...</p>
+      <p>My latest record, "K.O." will be available everywhere...</p>
+      <p>Cheers,<br>Ben</p>
+    </div>
   </section>
 
   <section id="contact" class="contact">
-    <div class="container">
-      <h2>Contact</h2>
-      <p>For inquiries, bookings, or press, feel free to <a href="mailto:bminahan73@gmail.com">Email me!</a></p>
-    </div>
+    <h2>Contact</h2>
+    <p>Email me anytime: <a href="mailto:bminahan73@gmail.com">bminahan73@gmail.com</a></p>
   </section>
 
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 Ben Minahan. All rights reserved.</p>
-    </div>
+  <footer>
+    <p>&copy; 2025 Ben Minahan. All rights reserved.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        document.querySelector(link.getAttribute("href")).scrollIntoView({
+          behavior: "smooth"
+        });
+      });
+    });
+
+    // Dynamic Audio Player
+    const select = document.getElementById("songSelect");
+    const audio = document.getElementById("audioPlayer");
+    const source = document.getElementById("audioSource");
+
+    select.addEventListener("change", () => {
+      source.src = select.value;
+      audio.load();
+      audio.play();
+    });
+  </script>
 </body>
 </html>
