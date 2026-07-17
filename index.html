@@ -107,60 +107,193 @@
       text-align: center;
     }
 
-    .glass-box {
-      margin: 25px auto;
-      padding: 25px;
-      width: min(90%, 500px);
-      background: rgba(255, 255, 255, 0.06);
-      border-radius: 18px;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    .carousel-wrapper {
+      margin: 25px auto 10px;
+      max-width: 880px;
+      position: relative;
     }
 
-    /* Custom Select */
-    .styled-select {
-      width: 100%;
-      padding: 14px 18px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.25);
-      background: rgba(255,255,255,0.08);
-      color: #fff;
-      font-size: 1.05rem;
+    .carousel {
+      overflow: hidden;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.20);
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 20px;
+      width: 200%;
+      transition: transform 0.4s ease;
+      padding: 20px;
+    }
+
+    .album-card {
+      flex: 0 0 50%;
+      min-width: 50%;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
       cursor: pointer;
-      backdrop-filter: blur(8px);
-      transition: 0.3s;
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .styled-select:hover {
-      background: rgba(255,255,255,0.15);
+    .album-card:hover,
+    .album-card.active {
+      transform: translateY(-3px);
+      border-color: #7ab8ff;
+      box-shadow: 0 18px 35px rgba(0,0,0,0.2);
     }
 
-    .styled-select:focus {
-      outline: 2px solid #7ab8ff;
+    .album-art {
+      aspect-ratio: 1 / 1;
+      min-height: 320px;
+      width: calc(100% - 40px);
+      margin: 0 auto;
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #111;
+      box-shadow: inset 0 0 45px rgba(0, 0, 0, 0.35);
     }
 
-    /* Ensure visible text in the dropdown list */
-    .styled-select {
-    color: #fff; /* keeps the selected value white in your dark UI */
+    .album-art-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
-    /* Make the option text dark on the (typically) light dropdown background */
-    .styled-select option {
-    color: #111;
-    background: #fff; /* explicit background helps some browsers */
+    .album-release {
+      margin: 10px 20px 0;
+      color: #d3d3d3;
+      font-size: 0.95rem;
+      letter-spacing: 0.01em;
     }
 
-    /* small nicety: make the selected option show white text on dark background */
-    .styled-select option:checked,
-    .styled-select option[selected] {
-    color: #fff;
-    background: rgba(0,0,0,0.6);
+    .album-art-time,
+    .album-art-ko {
+      position: relative;
+    }
+
+    .album-art-time::after,
+    .album-art-ko::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.32) 100%);
+      pointer-events: none;
+    }
+
+    .album-label {
+      display: inline-block;
+      padding: 16px 22px;
+      border-radius: 999px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(0,0,0,0.18);
+    }
+
+    .album-card h3 {
+      padding: 18px 20px 22px;
+      font-size: 1.35rem;
+      letter-spacing: 0.01em;
+    }
+
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      cursor: pointer;
+      font-size: 1.35rem;
+      z-index: 2;
+      transition: background 0.2s ease;
+    }
+
+    .carousel-nav:hover {
+      background: rgba(0,0,0,0.75);
+    }
+
+    .carousel-nav.prev {
+      left: -22px;
+    }
+
+    .carousel-nav.next {
+      right: -22px;
+    }
+
+    .album-player-panel {
+      margin: 25px auto;
+      padding: 28px;
+      width: min(90%, 840px);
+      background: rgba(255,255,255,0.06);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.24);
+      text-align: left;
+    }
+
+    .album-details {
+      font-size: 1rem;
+      color: #d7d7d7;
+      margin-bottom: 18px;
+      min-height: 24px;
+    }
+
+    .track-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .track-btn {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 14px;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .track-btn:hover:not(:disabled) {
+      background: rgba(255,255,255,0.12);
+      border-color: #7ab8ff;
+    }
+
+    .track-btn:disabled,
+    .track-btn.disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    .track-message {
+      margin-top: 16px;
+      color: #ccc;
+      font-size: 0.99rem;
     }
 
     audio {
       width: 100%;
-      margin-top: 20px;
+      margin-top: 22px;
       filter: drop-shadow(0 0 6px rgba(0,0,0,0.35));
     }
 
@@ -230,21 +363,39 @@
   </section>
 
   <section id="music" class="music">
-    <h2>Listen to the latest tracks:</h2>
+    <h2>Discover the new album: It's Time</h2>
+    <p>Tap the cover to check out the new record, then switch over to K.O. for the previous release.</p>
 
-    <div class="glass-box">
-      <select id="songSelect" class="styled-select">
-        <option value="https://github.com/bminahan73/music/releases/download/1.0/01.Black.Sludge.wav">Black Sludge</option>
-        <option value="https://github.com/bminahan73/music/releases/download/1.0/02.I.ll.Wait.It.Out.wav">I'll Wait it Out</option>
-        <option value="https://github.com/bminahan73/music/releases/download/1.0/03.What.are.you.Running.From.wav">What are you Running From</option>
-        <option value="https://github.com/bminahan73/music/releases/download/1.0/04.Ghosts.wav">Ghost (Justin Bieber Cover)</option>
-        <option value="https://github.com/bminahan73/music/releases/download/1.0/05.Every.Time.you.Look.Around.wav">Every Time you Look Around</option>
-        <option value="https://github.com/bminahan73/music/releases/download/1.0/06.Can.t.Look.Away.wav">Can't Look Away</option>
-      </select>
+    <div class="carousel-wrapper">
+      <button class="carousel-nav prev" id="carouselPrev" aria-label="Previous album">‹</button>
+      <div class="carousel">
+        <div class="carousel-track" id="carouselTrack">
+          <article class="album-card active" data-album="its-time">
+            <div class="album-art album-art-time">
+              <img class="album-art-image" src="img/Its_Time_Album_Art.png" alt="It's Time album art" loading="lazy" />
+              <span class="album-label">It's Time</span>
+            </div>
+            <h3>It's Time</h3>
+            <p class="album-release">Released July 17th 2026</p>
+          </article>
+          <article class="album-card" data-album="ko">
+            <div class="album-art album-art-ko">
+              <img class="album-art-image" src="img/KO_Album_Art.png" alt="K.O. album art" loading="lazy" />
+              <span class="album-label">K.O.</span>
+            </div>
+            <h3>K.O.</h3>
+            <p class="album-release">Released March 1st 2023</p>
+          </article>
+        </div>
+      </div>
+      <button class="carousel-nav next" id="carouselNext" aria-label="Next album">›</button>
+    </div>
 
-      <audio id="audioPlayer" controls>
-        <source id="audioSource" src="https://github.com/bminahan73/music/releases/download/1.0/01.Black.Sludge.wav" type="audio/mpeg" />
-      </audio>
+    <div class="album-player-panel">
+      <div class="album-details" id="albumDetails">Album selected: K.O.</div>
+      <ul class="track-list" id="trackList"></ul>
+      <p class="track-message" id="trackMessage"></p>
+      <audio id="audioPlayer" controls></audio>
     </div>
 
     <h2>or watch the latest music video</h2>
@@ -257,10 +408,12 @@
   <section id="about" class="about">
     <div class="container">
       <h2>About Me</h2>
+      <p>Hi — I'm Ben Minahan. I've been making music in one form or another my whole life: I play guitar, bass and piano, and I sing. More recently I've taken up drums and banjo. I love making beats, arranging melodies, and creating unusual sounds in my home studio in Kansas City, MO. My goal is to write songs people enjoy listening to while having fun doing it.</p>
 
-      <p>Hey, everyone! My name is Ben Minahan and I've been playing music in one form or another my whole life. Guitar, bass, piano, voice, and more recently drums and banjo. I also LOVE making beats, arranging melodies, or making weird AF sounds in my home audio production studio in Kansas City, MO. My main goal with music is to make songs that people love listening to, and have fun doing it.</p>
-      <p>Over the years, I have had the opportunity to play a wide range of music with some extremely talented musicians. But, I am always cooking something up solo. Since 2020, I have released 16 original songs in a variety of genres.</p>
-      <p>In 2025, I'm hoping to play more live shows, adn can't wait to see you there! Until then, I invite you to listen to all my music for free (on YouTube and on here), and if you like what you hear, you can share it with others or even buy a physical CD like its 2002!</p>
+      <p>Over the years I've had the chance to play a wide range of music with some extremely talented musicians, but I'm always working on solo material as well. Since 2020 I've released 16 original songs across a variety of genres.</p>
+
+      <p>In 2025 I'm planning to play more live shows and can't wait to see you there. Until then, I invite you to listen to my music for free (on YouTube and here). If you like what you hear, please share it with others — or buy a physical CD if you're feeling nostalgic.</p>
+
       <p>Cheers,<br>Ben</p>
     </div>
   </section>
@@ -285,16 +438,115 @@
       });
     });
 
-    // Dynamic Audio Player
-    const select = document.getElementById("songSelect");
-    const audio = document.getElementById("audioPlayer");
-    const source = document.getElementById("audioSource");
+    const albums = {
+      "its-time": {
+        title: "It's Time",
+        releaseDate: "July 17th 2026",
+        tracks: [
+          { title: "Fade Away", src: "https://github.com/bminahan73/music/releases/download/2.0/01.Fade.Away.wav" },
+          { title: "Puget Sound", src: "https://github.com/bminahan73/music/releases/download/2.0/02.Puget.Sound.wav" },
+          { title: "Crazy", src: "https://github.com/bminahan73/music/releases/download/2.0/03.Crazy.wav" },
+          { title: "It's Time", src: "https://github.com/bminahan73/music/releases/download/2.0/04.Its.Time.wav" },
+          { title: "Rome", src: "https://github.com/bminahan73/music/releases/download/2.0/05.Rome.wav" },
+          { title: "You're Ok", src: "https://github.com/bminahan73/music/releases/download/2.0/06.Youre.OK.wav" }
+        ]
+      },
+      "ko": {
+        title: "K.O.",
+        releaseDate: "March 1st 2023",
+        tracks: [
+          { title: "Black Sludge", src: "https://github.com/bminahan73/music/releases/download/1.0/01.Black.Sludge.wav" },
+          { title: "I'll Wait It Out", src: "https://github.com/bminahan73/music/releases/download/1.0/02.I.ll.Wait.It.Out.wav" },
+          { title: "What Are You Running From", src: "https://github.com/bminahan73/music/releases/download/1.0/03.What.are.you.Running.From.wav" },
+          { title: "Ghost (Justin Bieber Cover)", src: "https://github.com/bminahan73/music/releases/download/1.0/04.Ghosts.wav" },
+          { title: "Every Time You Look Around", src: "https://github.com/bminahan73/music/releases/download/1.0/05.Every.Time.you.Look.Around.wav" },
+          { title: "Can't Look Away", src: "https://github.com/bminahan73/music/releases/download/1.0/06.Can.t.Look.Away.wav" }
+        ]
+      }
+    };
 
-    select.addEventListener("change", () => {
-      source.src = select.value;
+    const albumCards = document.querySelectorAll('.album-card');
+    const trackList = document.getElementById('trackList');
+    const albumDetails = document.getElementById('albumDetails');
+    const trackMessage = document.getElementById('trackMessage');
+    const audio = document.getElementById('audioPlayer');
+    const carouselTrack = document.getElementById('carouselTrack');
+    const prevButton = document.getElementById('carouselPrev');
+    const nextButton = document.getElementById('carouselNext');
+
+    let currentIndex = 1;
+    const albumOrder = ['its-time', 'ko'];
+
+    function setActiveAlbum(albumId, shouldScroll = true) {
+      albumCards.forEach(card => {
+        card.classList.toggle('active', card.dataset.album === albumId);
+      });
+
+      const album = albums[albumId];
+      albumDetails.textContent = `Album selected: ${album.title} — Released ${album.releaseDate}`;
+      renderTrackList(album);
+
+      if (shouldScroll) {
+        currentIndex = albumOrder.indexOf(albumId);
+        carouselTrack.style.transform = `translateX(-${currentIndex * 50}%)`;
+      }
+    }
+
+    function renderTrackList(album) {
+      trackList.innerHTML = '';
+      trackMessage.textContent = '';
+
+      album.tracks.forEach((track, index) => {
+        const listItem = document.createElement('li');
+        const button = document.createElement('button');
+        button.className = 'track-btn';
+        button.textContent = `${index + 1}. ${track.title}`;
+
+        if (track.src) {
+          button.addEventListener('click', () => loadTrack(track.src));
+        } else {
+          button.disabled = true;
+          button.classList.add('disabled');
+        }
+
+        listItem.appendChild(button);
+        trackList.appendChild(listItem);
+      });
+
+      const firstPlayable = album.tracks.find(track => track.src);
+      if (firstPlayable) {
+        loadTrack(firstPlayable.src, false);
+      } else {
+        audio.pause();
+        audio.removeAttribute('src');
+        audio.load();
+        trackMessage.textContent = 'Song links for "It\'s Time" will be added soon. Stay tuned.';
+      }
+    }
+
+    function loadTrack(src, autoplay = true) {
+      audio.src = src;
       audio.load();
-      audio.play();
+      if (autoplay) {
+        audio.play().catch(() => {});
+      }
+    }
+
+    albumCards.forEach(card => {
+      card.addEventListener('click', () => setActiveAlbum(card.dataset.album));
     });
+
+    prevButton.addEventListener('click', () => {
+      currentIndex = Math.max(0, currentIndex - 1);
+      setActiveAlbum(albumOrder[currentIndex]);
+    });
+
+    nextButton.addEventListener('click', () => {
+      currentIndex = Math.min(albumOrder.length - 1, currentIndex + 1);
+      setActiveAlbum(albumOrder[currentIndex]);
+    });
+
+    setActiveAlbum('its-time');
   </script>
 </body>
 </html>
