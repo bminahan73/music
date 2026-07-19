@@ -6,119 +6,250 @@
   <title>Ben Minahan Music - Official Website</title>
 
   <style>
-    /* Global Reset */
+    :root {
+      --bg: #050816;
+      --bg-soft: #0f172a;
+      --panel: rgba(255, 255, 255, 0.08);
+      --panel-strong: rgba(255, 255, 255, 0.12);
+      --text: #f8fafc;
+      --text-muted: #cbd5e1;
+      --accent: #7dd3fc;
+      --accent-strong: #38bdf8;
+      --border: rgba(255, 255, 255, 0.16);
+      --shadow: 0 24px 80px rgba(2, 6, 23, 0.45);
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: "Inter", Arial, sans-serif;
-      background: linear-gradient(135deg, #111 0%, #1f1f1f 100%);
-      color: #fff;
-      line-height: 1.6;
+      font-family: "Inter", "Segoe UI", Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.22), transparent 24%),
+        radial-gradient(circle at 85% 20%, rgba(129, 140, 248, 0.18), transparent 22%),
+        linear-gradient(135deg, var(--bg) 0%, var(--bg-soft) 45%, #111827 100%);
+      color: var(--text);
+      line-height: 1.7;
       overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(120deg, rgba(255,255,255,0.05), transparent 40%, rgba(255,255,255,0.03));
+      mix-blend-mode: screen;
     }
 
     .container {
-      width: min(90%, 1100px);
-      margin: auto;
+      width: min(92%, 1160px);
+      margin: 0 auto;
     }
 
-    /* Header */
+    .eyebrow {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
     header {
       position: sticky;
       top: 0;
-      backdrop-filter: blur(12px);
-      background: rgba(0, 0, 0, 0.55);
-      padding: 15px 0;
-      z-index: 20;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      z-index: 30;
+      backdrop-filter: blur(16px);
+      background: rgba(5, 8, 22, 0.78);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    nav {
+      padding: 16px 0;
     }
 
     nav ul {
       display: flex;
       justify-content: center;
+      gap: 24px;
       list-style: none;
-      gap: 40px;
+      flex-wrap: wrap;
     }
 
     nav a {
-      color: #fff;
+      color: var(--text);
       text-decoration: none;
-      font-size: 1.1rem;
-      font-weight: 500;
-      padding-bottom: 4px;
-      transition: 0.25s ease;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 999px;
+      transition: background 0.25s ease, color 0.25s ease;
     }
 
     nav a:hover {
-      color: #7ab8ff;
-      border-bottom: 2px solid #7ab8ff;
+      background: rgba(125, 211, 252, 0.15);
+      color: var(--accent);
     }
 
-    /* Hero Section */
     .hero {
-      background: url('./img/me-music.jpg') center/cover no-repeat;
-      height: 70vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 20px;
       position: relative;
+      min-height: 92vh;
+      display: grid;
+      align-items: center;
+      padding: 90px 0 70px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(5, 8, 22, 0.86) 0%, rgba(5, 8, 22, 0.42) 60%, rgba(5, 8, 22, 0.82) 100%), url('./img/me-music.jpg') center/cover no-repeat;
+      z-index: -2;
     }
 
     .hero::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.5), #111);
+      background: linear-gradient(180deg, rgba(5, 8, 22, 0.1) 0%, rgba(5, 8, 22, 0.4) 100%);
+      z-index: -1;
     }
 
     .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 700px;
+      max-width: 760px;
+      display: grid;
+      gap: 22px;
+      padding: 32px 0;
     }
 
-    .hero h2 {
-      font-size: 3.3rem;
-      font-weight: 700;
-      margin-bottom: 10px;
+    .hero h1 {
+      font-size: clamp(2.4rem, 4.7vw, 4.2rem);
+      line-height: 1.05;
+      font-weight: 800;
+      letter-spacing: -0.03em;
     }
 
     .hero p {
-      font-size: 1.25rem;
-      opacity: 0.9;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 640px;
     }
 
-    /* Section Titles */
-    h2 {
-      font-size: 2.4rem;
-      font-weight: 600;
-      margin-bottom: 20px;
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 6px;
     }
 
-    /* Music Section */
-    .music {
-      padding: 70px 0;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #03111d;
+      box-shadow: 0 14px 34px rgba(56, 189, 248, 0.25);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .hero-highlights {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .highlight-card {
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 16px;
+      padding: 12px 16px;
+      min-width: 125px;
+      backdrop-filter: blur(10px);
+    }
+
+    .highlight-card strong {
+      display: block;
+      font-size: 1.15rem;
+      color: var(--accent);
+    }
+
+    .highlight-card span {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    section {
+      padding: 86px 0;
+    }
+
+    .section-heading {
       text-align: center;
+      max-width: 720px;
+      margin: 0 auto 40px;
+    }
+
+    .section-heading h2,
+    .about-card h2,
+    .contact-card h2 {
+      font-size: clamp(1.9rem, 3vw, 2.7rem);
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-heading p,
+    .about-card p,
+    .contact-card p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .music-layout {
+      display: grid;
+      gap: 24px;
+      align-items: start;
     }
 
     .carousel-wrapper {
-      margin: 25px auto 10px;
-      max-width: 880px;
       position: relative;
+      margin: 0 auto;
+      max-width: 980px;
+      padding: 0 10px;
     }
 
     .carousel {
       overflow: hidden;
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.04);
-      box-shadow: 0 14px 40px rgba(0,0,0,0.20);
+      border-radius: 30px;
+      background: linear-gradient(160deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
     }
 
     .carousel-track {
@@ -126,15 +257,15 @@
       gap: 20px;
       width: 200%;
       transition: transform 0.4s ease;
-      padding: 20px;
+      padding: 22px;
     }
 
     .album-card {
       flex: 0 0 50%;
       min-width: 50%;
-      border-radius: 22px;
+      border-radius: 24px;
       border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.06);
       cursor: pointer;
       overflow: hidden;
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
@@ -142,16 +273,16 @@
 
     .album-card:hover,
     .album-card.active {
-      transform: translateY(-3px);
-      border-color: #7ab8ff;
-      box-shadow: 0 18px 35px rgba(0,0,0,0.2);
+      transform: translateY(-4px);
+      border-color: rgba(125, 211, 252, 0.7);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.24);
     }
 
     .album-art {
       aspect-ratio: 1 / 1;
       min-height: 320px;
-      width: calc(100% - 40px);
-      margin: 0 auto;
+      width: calc(100% - 32px);
+      margin: 16px auto 0;
       position: relative;
       border-radius: 20px;
       overflow: hidden;
@@ -166,44 +297,42 @@
       display: block;
     }
 
-    .album-release {
-      margin: 10px 20px 0;
-      color: #d3d3d3;
-      font-size: 0.95rem;
-      letter-spacing: 0.01em;
-    }
-
-    .album-art-time,
-    .album-art-ko {
-      position: relative;
-    }
-
     .album-art-time::after,
     .album-art-ko::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.32) 100%);
+      background: linear-gradient(180deg, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.35) 100%);
       pointer-events: none;
     }
 
     .album-label {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
       display: inline-block;
-      padding: 16px 22px;
+      padding: 10px 16px;
       border-radius: 999px;
-      font-size: 1.15rem;
+      font-size: 0.95rem;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
       border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(0,0,0,0.18);
+      background: rgba(3, 13, 24, 0.72);
+      backdrop-filter: blur(8px);
     }
 
     .album-card h3 {
-      padding: 18px 20px 22px;
-      font-size: 1.35rem;
-      letter-spacing: 0.01em;
+      padding: 16px 20px 8px;
+      font-size: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+
+    .album-release {
+      padding: 0 20px 18px;
+      color: #cbd5e1;
+      font-size: 0.95rem;
     }
 
     .carousel-nav {
@@ -211,45 +340,47 @@
       top: 50%;
       transform: translateY(-50%);
       border: none;
-      width: 44px;
-      height: 44px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
-      background: rgba(0,0,0,0.55);
+      background: rgba(2, 8, 23, 0.8);
       color: #fff;
       cursor: pointer;
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       z-index: 2;
-      transition: background 0.2s ease;
+      transition: background 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.25);
     }
 
     .carousel-nav:hover {
-      background: rgba(0,0,0,0.75);
+      background: rgba(2, 8, 23, 0.95);
+      transform: translateY(-50%) scale(1.04);
     }
 
     .carousel-nav.prev {
-      left: -22px;
+      left: -6px;
     }
 
     .carousel-nav.next {
-      right: -22px;
+      right: -6px;
     }
 
     .album-player-panel {
-      margin: 25px auto;
+      margin: 24px auto 0;
       padding: 28px;
-      width: min(90%, 840px);
-      background: rgba(255,255,255,0.06);
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
+      width: min(100%, 900px);
+      background: rgba(255,255,255,0.07);
+      border-radius: 24px;
+      backdrop-filter: blur(14px);
       border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 10px 28px rgba(0,0,0,0.24);
+      box-shadow: var(--shadow);
       text-align: left;
     }
 
     .album-details {
       font-size: 1rem;
-      color: #d7d7d7;
-      margin-bottom: 18px;
+      color: #e2e8f0;
+      margin-bottom: 16px;
       min-height: 24px;
     }
 
@@ -258,25 +389,25 @@
       padding: 0;
       margin: 0;
       display: grid;
-      gap: 12px;
+      gap: 10px;
     }
 
     .track-btn {
       width: 100%;
-      border: 1px solid rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.12);
       border-radius: 14px;
-      padding: 14px 18px;
-      background: rgba(255,255,255,0.05);
-      color: #fff;
-      font-size: 1rem;
+      padding: 13px 16px;
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      font-size: 0.95rem;
       cursor: pointer;
       text-align: left;
       transition: background 0.25s ease, border-color 0.25s ease;
     }
 
     .track-btn:hover:not(:disabled) {
-      background: rgba(255,255,255,0.12);
-      border-color: #7ab8ff;
+      background: rgba(125, 211, 252, 0.12);
+      border-color: rgba(125, 211, 252, 0.45);
     }
 
     .track-btn:disabled,
@@ -286,60 +417,165 @@
     }
 
     .track-message {
-      margin-top: 16px;
-      color: #ccc;
-      font-size: 0.99rem;
+      margin-top: 14px;
+      color: #cbd5e1;
+      font-size: 0.95rem;
     }
 
     audio {
       width: 100%;
-      margin-top: 22px;
+      margin-top: 16px;
       filter: drop-shadow(0 0 6px rgba(0,0,0,0.35));
     }
 
+    .video-card {
+      margin: 42px auto 0;
+      padding: 26px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .video-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+    }
+
     iframe {
-      border-radius: 16px;
-      margin-top: 30px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      width: 100%;
+      max-width: 760px;
+      height: min(46vw, 430px);
+      border: 0;
+      border-radius: 18px;
+      margin-top: 18px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.28);
     }
 
-    /* About Section */
     .about {
-      padding: 70px 0;
-      text-align: center;
-      background: #181818;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
     }
 
-    .about p {
-      max-width: 800px;
-      margin: 12px auto;
-      opacity: 0.9;
-      font-size: 1.1rem;
+    .about-grid {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: 1.3fr 0.7fr;
+      align-items: start;
     }
 
-    /* Contact Section */
-    .contact {
-      padding: 70px 0;
-      text-align: center;
+    .about-card, .about-panel, .contact-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
     }
 
-    .contact a {
-      color: #7ab8ff;
-      font-size: 1.3rem;
+    .about-card p {
+      margin-bottom: 16px;
+    }
+
+    .about-card a,
+    .about-panel a,
+    .contact-card a {
+      color: var(--accent);
       text-decoration: none;
     }
 
-    .contact a:hover {
+    .about-card a:hover,
+    .about-panel a:hover,
+    .contact-card a:hover {
       text-decoration: underline;
     }
 
-    /* Footer */
-    footer {
-      padding: 25px 0;
-      background: #101010;
-      text-align: center;
+    .chip-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .chip-list li {
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      color: #e2e8f0;
       font-size: 0.95rem;
-      opacity: 0.8;
+    }
+
+    .about-panel + .about-panel {
+      margin-top: 16px;
+    }
+
+    .contact {
+      padding-top: 40px;
+      padding-bottom: 110px;
+    }
+
+    .contact-card {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .contact-card a {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    footer {
+      padding: 24px 0 36px;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 800px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 70px;
+      }
+
+      .album-card {
+        flex-basis: 100%;
+        min-width: 100%;
+      }
+
+      .carousel-track {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      section {
+        padding: 70px 0;
+      }
+
+      .hero-content {
+        padding: 18px 0;
+      }
+
+      .album-player-panel,
+      .video-card,
+      .about-card,
+      .about-panel,
+      .contact-card {
+        padding: 22px;
+      }
+
+      .carousel-nav {
+        width: 40px;
+        height: 40px;
+      }
     }
   </style>
 </head>
@@ -355,73 +591,129 @@
     </nav>
   </header>
 
-  <section class="hero">
-    <div class="hero-content">
-      <h2>Welcome to my music page!</h2>
-      <p>I'll post links to my latest tracks and videos. Always free.</p>
-    </div>
-  </section>
-
-  <section id="music" class="music">
-    <h2>Discover the new album: It's Time</h2>
-    <p>Tap the cover to check out the new record, then switch over to K.O. for the previous release.</p>
-
-    <div class="carousel-wrapper">
-      <button class="carousel-nav prev" id="carouselPrev" aria-label="Previous album">‹</button>
-      <div class="carousel">
-        <div class="carousel-track" id="carouselTrack">
-          <article class="album-card active" data-album="its-time">
-            <div class="album-art album-art-time">
-              <img class="album-art-image" src="img/Its_Time_Album_Art.png" alt="It's Time album art" loading="lazy" />
-              <span class="album-label">It's Time</span>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <p class="eyebrow">Original music • live performances • free listening</p>
+          <h1>Ben Minahan creates music with heart, grit, and melody.</h1>
+          <p>Explore the latest releases, discover the stories behind the songs, and listen for free from one beautifully curated experience.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#music">Listen now</a>
+            <a class="btn btn-secondary" href="#about">Meet Ben</a>
+          </div>
+          <div class="hero-highlights">
+            <div class="highlight-card">
+              <strong>2</strong>
+              <span>albums available</span>
             </div>
-            <h3>It's Time</h3>
-            <p class="album-release">Released July 17th 2026</p>
-          </article>
-          <article class="album-card" data-album="ko">
-            <div class="album-art album-art-ko">
-              <img class="album-art-image" src="img/KO_Album_Art.png" alt="K.O. album art" loading="lazy" />
-              <span class="album-label">K.O.</span>
+            <div class="highlight-card">
+              <strong>Free</strong>
+              <span>streaming online</span>
             </div>
-            <h3>K.O.</h3>
-            <p class="album-release">Released March 1st 2023</p>
-          </article>
+            <div class="highlight-card">
+              <strong>Live</strong>
+              <span>shows coming soon</span>
+            </div>
+          </div>
         </div>
       </div>
-      <button class="carousel-nav next" id="carouselNext" aria-label="Next album">›</button>
-    </div>
+    </section>
 
-    <div class="album-player-panel">
-      <div class="album-details" id="albumDetails">Album selected: K.O.</div>
-      <ul class="track-list" id="trackList"></ul>
-      <p class="track-message" id="trackMessage"></p>
-      <audio id="audioPlayer" controls></audio>
-    </div>
+    <section id="music" class="music">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Latest releases</p>
+          <h2>Choose a record and settle into the sound.</h2>
+          <p>Tap an album cover to switch between releases, then open the track list to stream a selection instantly.</p>
+        </div>
 
-    <h2>or watch the latest music video</h2>
-    <iframe width="560" height="315"
-      src="https://www.youtube.com/embed/m8lIulP25Xk?si=ZqQTw4-spLKIsYto"
-      allowfullscreen>
-    </iframe>
-  </section>
+        <div class="music-layout">
+          <div class="carousel-wrapper">
+            <button class="carousel-nav prev" id="carouselPrev" aria-label="Previous album">‹</button>
+            <div class="carousel">
+              <div class="carousel-track" id="carouselTrack">
+                <article class="album-card active" data-album="its-time">
+                  <div class="album-art album-art-time">
+                    <img class="album-art-image" src="img/Its_Time_Album_Art.png" alt="It's Time album art" loading="lazy" />
+                    <span class="album-label">It's Time</span>
+                  </div>
+                  <h3>It's Time</h3>
+                  <p class="album-release">Released July 17th 2026</p>
+                </article>
+                <article class="album-card" data-album="ko">
+                  <div class="album-art album-art-ko">
+                    <img class="album-art-image" src="img/KO_Album_Art.png" alt="K.O. album art" loading="lazy" />
+                    <span class="album-label">K.O.</span>
+                  </div>
+                  <h3>K.O.</h3>
+                  <p class="album-release">Released March 1st 2023</p>
+                </article>
+              </div>
+            </div>
+            <button class="carousel-nav next" id="carouselNext" aria-label="Next album">›</button>
+          </div>
 
-  <section id="about" class="about">
-    <div class="container">
-      <h2>About Me</h2>
-      <p>Hi — I'm Ben Minahan. I've been making music in one form or another my whole life: I play guitar, bass and piano, and I sing. More recently I've taken up drums and banjo. I love making beats, arranging melodies, and creating unusual sounds in my home studio in Kansas City, MO. My goal is to write songs people enjoy listening to while having fun doing it.</p>
+          <div class="album-player-panel">
+            <div class="album-details" id="albumDetails">Album selected: K.O.</div>
+            <ul class="track-list" id="trackList"></ul>
+            <p class="track-message" id="trackMessage"></p>
+            <audio id="audioPlayer" controls></audio>
+          </div>
+        </div>
 
-      <p>Over the years I've had the chance to play a wide range of music with some extremely talented musicians, but I'm always working on solo material as well. Since 2020 I've released dozens of original songs across a variety of genres.</p>
+        <div class="video-card">
+          <h3>Watch the latest music video</h3>
+          <p>Fresh visuals and a new sonic direction.</p>
+          <iframe
+            src="https://www.youtube.com/embed/m8lIulP25Xk?si=ZqQTw4-spLKIsYto"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </section>
 
-      <p>In 2026 I'm planning to play more live shows and can't wait to see you there. Until then, I invite you to listen to my music for free (on YouTube and here). If you like what you hear, please share it with others — or buy a physical CD if you're feeling nostalgic.</p>
+    <section id="about" class="about">
+      <div class="container about-grid">
+        <div class="about-card">
+          <p class="eyebrow">About</p>
+          <h2>Music shaped by years of performance, writing, and collaboration.</h2>
+          <p>Hi — I'm Ben Minahan, and music has been part of my life since grade school. I sing, play bass, guitar, piano, and I’ve also picked up drums and banjo over the years.</p>
+          <p>My experience spans choir, all-state honors, bands across many genres, home recordings, live shows, and acoustic performances at coffee shops and open mic nights. I’ve spent years building a sound that feels open, honest, and human.</p>
+          <p>In 2026 I’m planning to play more live shows and can’t wait to share that energy with you. Until then, feel free to listen, share, and enjoy the music for free.</p>
+        </div>
 
-      <p>Cheers,<br>Ben</p>
-    </div>
-  </section>
+        <div class="about-sidebar">
+          <div class="about-panel">
+            <h3>Background</h3>
+            <ul class="chip-list">
+              <li>All-state choir and barbershop quartet experience</li>
+              <li>Multiple bands across rock, metal, punk, and electronic styles</li>
+              <li>Home studio recording and original songwriting</li>
+            </ul>
+          </div>
+          <div class="about-panel">
+            <h3>Links</h3>
+            <p><a href="https://sixstringmusicstudios.com/flat-canyon-drifters" target="_blank" rel="noopener noreferrer">Flat Canyon Drifters</a></p>
+            <p><a href="https://wolfnativ.bandcamp.com/album/origins" target="_blank" rel="noopener noreferrer">Wolf Nativ</a></p>
+            <p><a href="https://www.youtube.com/@weshouldleavethistree6694" target="_blank" rel="noopener noreferrer">We Should Leave This Tree</a></p>
+            <p><a href="https://www.youtube.com/@benminahanmusic635" target="_blank" rel="noopener noreferrer">YouTube channel</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <section id="contact" class="contact">
-    <h2>Contact</h2>
-    <p>Email me anytime: <a href="mailto:bminahan73@gmail.com">bminahan73@gmail.com</a></p>
-  </section>
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="contact-card">
+          <p class="eyebrow">Contact</p>
+          <h2>Let’s connect.</h2>
+          <p>Interested in collaborations, live shows, or sharing the music? Send me an email anytime.</p>
+          <a href="mailto:bminahan73@gmail.com">bminahan73@gmail.com</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <p>&copy; 2026 Ben Minahan. All rights reserved.</p>
